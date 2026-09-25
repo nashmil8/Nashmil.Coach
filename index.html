@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eaf5ff">
+<title>Daily Plan</title>
+<style>
+.profileCard{text-align:center;padding-top:15px}.motivationLabel{text-align:right;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}.profileCard textarea{text-align:center;margin-bottom:15px}.profilePhotoWrap{display:flex;flex-direction:column;align-items:center}.photoBox{width:112px;height:112px;border-radius:50%;background:var(--blue2);border:3px solid #d5e9f8;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;box-shadow:0 4px 15px #9fc5df35}.photoBox img{width:100%;height:100%;object-fit:cover;display:none}.photoBox.hasPhoto img{display:block}.photoBox.hasPhoto #photoPlaceholder{display:none}.photoBox span{display:block;font-size:29px;color:var(--blue);line-height:1}.photoBox small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.profileName{font-size:17px;font-weight:700;margin-top:9px}.nameButton{border:0;background:none;color:var(--muted);font:inherit;font-size:10px;margin-top:2px}
+:root{--bg:#eef7ff;--card:#fff;--text:#233247;--muted:#7c8da1;--blue:#70aadd;--blue2:#e3f2ff;--line:#e4edf5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif}
+.app{max-width:570px;margin:auto;padding:20px 16px 100px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}h1{font-size:27px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}.home{border:0;background:#fff;border-radius:14px;width:43px;height:43px;color:var(--blue);font-size:19px}
+.card{background:#fff;border-radius:21px;padding:16px;margin-bottom:12px;box-shadow:0 5px 20px #a9c9df20}h2{font-size:17px;margin:0 0 13px}
+.dateNav{display:flex;justify-content:space-between;align-items:center;background:var(--blue2);border-radius:17px;padding:9px 11px;margin-bottom:12px}.dateNav button{border:0;background:#fff;color:var(--blue);border-radius:11px;width:35px;height:35px;font-size:19px}.date{text-align:center}.date b{display:block;font-size:14px}.date small{color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#f8fbfe;border:1px solid var(--line);border-radius:14px;padding:11px}.stat label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.stat input,.stat select{width:100%;border:0;background:transparent;font:inherit;color:var(--text);outline:none}
+.task{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.check{width:22px;height:22px;border:2px solid #c7d5e2;border-radius:7px;display:grid;place-items:center;cursor:pointer;flex:none}.task.done .check{background:var(--blue);border-color:var(--blue);color:#fff}.task.done .label{text-decoration:line-through;color:#a8b1ba}.label{flex:1}.time{font-size:11px;color:var(--muted);white-space:nowrap}.del{border:0;background:none;color:#b7c0c9;font-size:16px}
+.add{display:grid;grid-template-columns:1fr 105px 40px;gap:6px;margin-top:10px}.add input{min-width:0;border:1px solid var(--line);border-radius:11px;padding:9px;background:#fafcff;font:inherit}.add button,.bluebtn{border:0;border-radius:11px;background:var(--blue);color:white;font:inherit}
+.progress{height:7px;background:#edf2f6;border-radius:99px;overflow:hidden;margin-top:10px}.bar{height:100%;background:var(--blue);width:0}
+.water{display:flex;align-items:center;gap:9px}.water button{border:0;background:var(--blue2);color:var(--blue);border-radius:11px;width:38px;height:38px;font-size:19px}.water strong{font-size:23px;color:var(--blue)}.water input{width:85px;border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.habit{background:#f8fbfe;border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer}.habit.done{background:var(--blue2);border-color:#cce5f8}.habit strong{display:block;font-size:13px}.habit small{font-size:10px;color:var(--muted)}
+.bookadd{display:grid;grid-template-columns:1fr 90px;gap:7px}.bookadd input,.goaladd input{border:1px solid var(--line);border-radius:11px;padding:10px;font:inherit}.bookadd button{border:0;border-radius:11px;background:var(--blue);color:#fff;font:inherit}.book{font-size:13px;padding:8px 0;border-bottom:1px solid var(--line)}
+textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;resize:vertical;font:inherit;background:#fafcff}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{background:#fff;border:1px solid var(--line);border-radius:11px;text-align:center;padding:7px 1px;font-size:10px;cursor:pointer}.day.active{background:var(--blue2);border-color:#cce5f8}.day b{display:block;font-size:11px}.day small{color:var(--muted)}
+.goaladd{display:grid;grid-template-columns:1fr 85px 42px;gap:6px;margin-top:10px}.goaladd button{border:0;border-radius:11px;background:var(--blue);color:#fff;font-size:18px}.goal{border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:8px}.goal.done{background:var(--blue2)}.goalhead{display:flex;align-items:center;gap:8px}.goal .goalcheck{width:22px;height:22px;border:2px solid #c7d5e2;border-radius:7px;display:grid;place-items:center;cursor:pointer}.goal.done .goalcheck{background:var(--blue);border-color:var(--blue);color:#fff}.goaltext{flex:1}.goal.done .goaltext{text-decoration:line-through;color:#9ba7b2}.goal small{color:var(--muted);display:block;margin-top:5px;margin-right:30px}
+.monthNav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.monthNav button{border:0;background:var(--blue2);color:var(--blue);border-radius:10px;width:34px;height:34px}.monthTitle{text-align:center;font-weight:700}
+.historyDay{border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:8px;background:#fff}.historyHead{display:flex;justify-content:space-between;align-items:center}.historyHead b{font-size:13px}.historyHead span{font-size:11px;color:var(--muted)}.historyItems{margin-top:7px;font-size:12px;color:#617286}.historyItems div{padding:3px 0}.historyItems .done{color:#91a0ae;text-decoration:line-through}.empty{color:var(--muted);font-size:13px;padding:5px 0}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#ffffffee;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));z-index:10}.tabs button{border:0;background:none;color:var(--muted);font:inherit;font-size:10px}.tabs button.active{color:var(--blue);font-weight:700}.tabs span{display:block;font-size:18px;margin-bottom:2px}
+.page{display:none}.page.active{display:block}
+
+.sleepResult{
+margin-top:10px;padding:11px 14px;border-radius:12px;
+background:var(--blue2);color:#17638a;text-align:center;font-weight:800;
+}
+.sleepHistory{
+display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;
+}
+.sleepHistory span{
+padding:6px 8px;border-radius:9px;background:#f3f8fb;font-size:12px;
+}
+.sleepAverage{
+margin:8px 0 12px;padding:10px 12px;border-radius:12px;
+background:var(--blue2);color:#17638a;font-weight:800;
+}
+.sleepAverage small{font-weight:500;opacity:.8}
+</style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#dff3ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Daily Plan">
+</head>
+<body>
+<div class="app">
+<div class="top"><div><h1>Daily Plan</h1><div class="sub">مدیریت روزانه من</div></div><button class="home" onclick="showPage('today')">⌂</button></div>
+
+<div class="card profileCard">
+  <div class="motivationLabel">✨ جمله امروز من</div>
+  <textarea id="motivation" rows="2" placeholder="امروز می‌خواهم به خودم یادآوری کنم که..."></textarea>
+  <div class="profilePhotoWrap">
+    <label class="photoBox" for="photoInput">
+      <img id="profilePhoto" alt="عکس من">
+      <div id="photoPlaceholder"><span>＋</span><small>عکس خودم را اضافه کنم</small></div>
+    </label>
+    <input id="photoInput" type="file" accept="image/*" style="display:none">
+    <div class="profileName" id="profileName">Nashmil</div>
+    <button class="nameButton" onclick="changeName()">ویرایش نام</button>
+  </div>
+</div>
+
+<div id="today" class="page active">
+<div class="dateNav"><button onclick="moveDay(-1)">‹</button><div class="date"><b id="todayDate"></b><small id="todayWeek"></small></div><button onclick="moveDay(1)">›</button></div>
+<div class="card"><h2>😴 خواب و بیداری</h2><div class="stats">
+<div class="stat"><label>🌙 ساعت خواب</label><input type="time" id="sleep" onchange="setField('sleep',this.value);updateSleepResult()"></div>
+<div class="stat"><label>☀️ ساعت بیداری</label><select id="wake" onchange="setField('wake',this.value);updateSleepResult()"></select></div>
+</div><div class="sleepResult" id="sleepResult">مدت خواب: —</div></div>
+<div class="card"><h2>👣 فعالیت امروز</h2>
+<div class="stat"><label>تعداد قدم‌های امروز</label><input type="number" min="0" id="steps" placeholder="مثلاً 7000" onchange="setField('steps',this.value)"></div>
+</div>
+<div class="card"><h2>کارهای امروز</h2><div id="tasks"></div><div class="add"><input id="taskText" placeholder="چه کاری باید انجام بدهم؟"><input id="taskTime" type="time"><button onclick="addTask()">+</button></div><div class="progress"><div class="bar" id="taskbar"></div></div></div>
+<div class="card"><h2>💧 آب امروز</h2><div class="water"><button onclick="water(-250)">−</button><strong id="water">0</strong><span>ml</span><button onclick="water(250)">+</button><input type="number" id="waterInput" placeholder="ml" onchange="setWater(this.value)"></div></div>
+<div class="card"><h2>🌿 رسیدگی به خودم</h2><div class="grid" id="habits"></div></div>
+<div class="card"><h2>📚 مطالعه</h2><div class="bookadd"><input id="book" placeholder="اسم کتابی که امروز خواندم"><button onclick="addBook()">ثبت</button></div><div id="books"></div></div>
+<div class="card"><h2>📝 یادداشت روز</h2><textarea id="note" rows="4" placeholder="مثلاً اتفاق مهم امروز، چیزی که یاد گرفتی، حس و حال روزت یا چیزی که می‌خواهی یادت بماند..."></textarea></div>
+</div>
+
+<div id="calendar" class="page">
+<div class="card"><h2>📅 تقویم و کارهای هر روز</h2><div class="monthNav"><button onclick="calendarMonth(-1)">‹</button><div class="monthTitle" id="calTitle"></div><button onclick="calendarMonth(1)">›</button></div><div class="week" id="calGrid"></div></div>
+<div class="card"><h2 id="selectedTitle"></h2><div id="selectedDay"></div></div>
+</div>
+
+<div id="goals" class="page">
+<div class="card"><h2>🎯 اهداف ماهانه</h2><div class="monthNav"><button onclick="goalMonth(-1)">‹</button><div class="monthTitle" id="goalTitle"></div><button onclick="goalMonth(1)">›</button></div><div id="goalsList"></div><div class="goaladd"><input id="goalText" placeholder="هدف این ماه..."><input id="goalTarget" placeholder="مثلاً 3 کتاب"><button onclick="addGoal()">+</button></div></div>
+<div class="card"><h2>مثال برای هدف ماهانه</h2><div class="empty">۳ کتاب تمام کنم · ۱۰۰٬۰۰۰ قدم ثبت کنم · ۱۲ جلسه ورزش انجام دهم · یک دوره را کامل کنم</div></div>
+</div>
+
+<div id="history" class="page">
+<div class="card"><h2>📊 حافظه و سابقه من</h2><div class="monthNav"><button onclick="historyMonth(-1)">‹</button><div class="monthTitle" id="histTitle"></div><button onclick="historyMonth(1)">›</button></div><div id="historyList"></div></div>
+<div class="card"><h2>📚 کتاب‌های این ماه</h2><div id="monthBooks"></div></div>
+</div>
+</div>
+
+<nav class="tabs">
+<button data-page="today" class="active" onclick="showPage('today')"><span>☀️</span>امروز</button>
+<button data-page="calendar" onclick="showPage('calendar')"><span>📅</span>تقویم</button>
+<button data-page="goals" onclick="showPage('goals')"><span>🎯</span>اهداف ماه</button>
+<button data-page="history" onclick="showPage('history')"><span>📊</span>سابقه</button>
+</nav>
+
+<script>
+const KEY='nashmil-daily-v3';
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||{days:{},goals:{},books:[]};
+let current=new Date();current.setHours(0,0,0,0);
+let calCursor=new Date(current);calCursor.setDate(1);
+let goalCursor=new Date(current);goalCursor.setDate(1);
+let histCursor=new Date(current);histCursor.setDate(1);
+let profile=db.profile||{name:'Nashmil',photo:''};
+
+function K(d){return d.toISOString().slice(0,10)}
+function day(){let k=K(current);if(!db.days[k])db.days[k]={tasks:[],sleep:'',wake:'',steps:'',water:0,habits:{'ورزش':false,'رسیدگی شخصی':false,'آرامش/مدیتیشن':false,'خواب کافی':false},books:[],note:'',motivation:''};return db.days[k]}
+function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function faDate(d){return new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'long',year:'numeric'}).format(d)}
+function enWeek(d){return new Intl.DateTimeFormat('en-US',{weekday:'long'}).format(d)}
+function monthName(d){return new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(d)}
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x.dataset.page===p));renderAll();window.scrollTo(0,0)}
+function moveDay(n){current.setDate(current.getDate()+n);renderAll()}
+function goToday(){current=new Date();current.setHours(0,0,0,0);renderAll()}
+function setField(f,v){day()[f]=v;save()}
+function addTask(){let t=document.getElementById('taskText').value.trim();if(!t)return;day().tasks.push({text:t,time:document.getElementById('taskTime').value,done:false});document.getElementById('taskText').value='';document.getElementById('taskTime').value='';save()}
+function toggleTask(i){day().tasks[i].done=!day().tasks[i].done;save()}
+function delTask(i){day().tasks.splice(i,1);save()}
+function water(n){day().water=Math.max(0,(day().water||0)+n);save()}
+function setWater(v){day().water=Math.max(0,Number(v)||0);save()}
+function toggleHabit(n){day().habits[n]=!day().habits[n];save()}
+function addBook(){let b=document.getElementById('book').value.trim();if(!b)return;day().books.push(b);db.books.push({date:K(current),name:b});document.getElementById('book').value='';save()}
+function setNote(){day().note=document.getElementById('note').value;localStorage.setItem(KEY,JSON.stringify(db))}
+function monthKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
+function addGoal(){let t=document.getElementById('goalText').value.trim();if(!t)return;let k=monthKey(goalCursor);if(!db.goals[k])db.goals[k]=[];db.goals[k].push({text:t,target:document.getElementById('goalTarget').value.trim(),done:false});document.getElementById('goalText').value='';document.getElementById('goalTarget').value='';save()}
+function toggleGoal(i){let k=monthKey(goalCursor);db.goals[k][i].done=!db.goals[k][i].done;save()}
+function delGoal(i){db.goals[monthKey(goalCursor)].splice(i,1);save()}
+function calendarMonth(n){calCursor.setMonth(calCursor.getMonth()+n);renderCalendar()}
+function goalMonth(n){goalCursor.setMonth(goalCursor.getMonth()+n);renderGoals()}
+function historyMonth(n){histCursor.setMonth(histCursor.getMonth()+n);renderHistory()}
+function selectDate(k){current=new Date(k+'T00:00:00');renderCalendar();renderToday()}
+
+function changeName(){
+  let n=prompt('اسمی که می‌خواهی در اپ نمایش داده شود:',profile.name||'Nashmil');
+  if(n!==null && n.trim()){profile.name=n.trim();db.profile=profile;localStorage.setItem(KEY,JSON.stringify(db));renderProfile();}
+}
+function renderProfile(){
+  document.getElementById('profileName').textContent=profile.name||'Nashmil';
+  const img=document.getElementById('profilePhoto'), box=document.querySelector('.photoBox');
+  if(profile.photo){img.src=profile.photo;box.classList.add('hasPhoto')}else{img.removeAttribute('src');box.classList.remove('hasPhoto')}
+  document.getElementById('motivation').value=day().motivation||'';
+}
+function handlePhoto(e){
+  const file=e.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{profile.photo=reader.result;db.profile=profile;localStorage.setItem(KEY,JSON.stringify(db));renderProfile()};
+  reader.readAsDataURL(file);
+}
+
+
+function sleepMinutes(sleep,wake){
+  if(!sleep || !wake) return null;
+  const [sh,sm]=sleep.split(':').map(Number);
+  const [wh,wm]=wake.split(':').map(Number);
+  let start=sh*60+sm, end=wh*60+wm;
+  if(end<=start) end+=1440;
+  const mins=end-start;
+  return mins>0 && mins<=1440 ? mins : null;
+}
+function sleepText(mins){
+  if(mins==null) return '—';
+  const h=Math.floor(mins/60), m=mins%60;
+  return m ? `${h} ساعت و ${m} دقیقه` : `${h} ساعت`;
+}
+function updateSleepResult(){
+  const mins=sleepMinutes(
+    document.getElementById('sleep').value,
+    document.getElementById('wake').value
+  );
+  document.getElementById('sleepResult').textContent='مدت خواب: '+sleepText(mins);
+}
+
+function renderToday(){
+let d=day();document.getElementById('todayDate').textContent=faDate(current);document.getElementById('todayWeek').textContent=enWeek(current);
+document.getElementById('motivation').value=d.motivation||'';
+document.getElementById('motivation').oninput=()=>{d.motivation=document.getElementById('motivation').value;localStorage.setItem(KEY,JSON.stringify(db));};
+document.getElementById('sleep').value=d.sleep||'';
+let s=document.getElementById('wake');s.innerHTML='';for(let h=5;h<=9;h++){let o=document.createElement('option');o.value=String(h).padStart(2,'0')+':00';o.textContent=o.value;s.appendChild(o)}s.value=d.wake||'';
+updateSleepResult();
+document.getElementById('steps').value=d.steps||'';document.getElementById('water').textContent=d.water||0;document.getElementById('waterInput').value=d.water||'';
+let ta=document.getElementById('tasks');ta.innerHTML=d.tasks.length?'':'<div class="empty">هنوز کاری برای امروز اضافه نکردی.</div>';d.tasks.forEach((x,i)=>ta.innerHTML+=`<div class="task ${x.done?'done':''}"><div class="check" onclick="toggleTask(${i})">${x.done?'✓':''}</div><div class="label">${esc(x.text)}</div>${x.time?`<span class="time">${x.time}</span>`:''}<button class="del" onclick="delTask(${i})">×</button></div>`);
+let done=d.tasks.filter(x=>x.done).length;document.getElementById('taskbar').style.width=(d.tasks.length?done/d.tasks.length*100:0)+'%';
+let h=document.getElementById('habits');h.innerHTML='';Object.entries(d.habits).forEach(([n,v])=>h.innerHTML+=`<div class="habit ${v?'done':''}" onclick="toggleHabit('${n}')"><strong>${n}</strong><small>${v?'انجام شد ✓':'ثبت نشده'}</small></div>`);
+document.getElementById('books').innerHTML=d.books.length?d.books.map(x=>`<div class="book">📖 ${esc(x)}</div>`).join(''):'<div class="empty">هنوز کتابی برای امروز ثبت نشده.</div>';
+document.getElementById('note').value=d.note||'';document.getElementById('note').oninput=setNote;
+}
+function renderCalendar(){
+document.getElementById('calTitle').textContent=monthName(calCursor);let first=new Date(calCursor),dayOfWeek=first.getDay(),mondayOffset=dayOfWeek===0?-6:1-dayOfWeek;first.setDate(first.getDate()+mondayOffset);
+let g=document.getElementById('calGrid');g.innerHTML='';for(let i=0;i<42;i++){let k=K(first),d=db.days[k],count=d?(d.tasks||[]).filter(x=>x.done).length:0,total=d?(d.tasks||[]).length:0;g.innerHTML+=`<div class="day ${k===K(current)?'active':''}" onclick="selectDate('${k}')"><b>${new Intl.DateTimeFormat('en-US',{weekday:'short'}).format(first)}</b>${first.getDate()}<br><small>${total?count+'/'+total:'—'}</small></div>`;first.setDate(first.getDate()+1)}
+let d=day();document.getElementById('selectedTitle').textContent='کارهای '+faDate(current);let el=document.getElementById('selectedDay');el.innerHTML=d.tasks.length?d.tasks.map((x,i)=>`<div class="task ${x.done?'done':''}"><div class="check" onclick="toggleTask(${i})">${x.done?'✓':''}</div><div class="label">${esc(x.text)}</div>${x.time?`<span class="time">${x.time}</span>`:''}</div>`).join(''):'<div class="empty">برای این روز کاری ثبت نشده است.</div>';
+}
+function renderGoals(){
+document.getElementById('goalTitle').textContent=monthName(goalCursor);let arr=db.goals[monthKey(goalCursor)]||[],el=document.getElementById('goalsList');el.innerHTML=arr.length?'':'<div class="empty">هنوز هدفی برای این ماه اضافه نکردی.</div>';arr.forEach((x,i)=>el.innerHTML+=`<div class="goal ${x.done?'done':''}"><div class="goalhead"><div class="goalcheck" onclick="toggleGoal(${i})">${x.done?'✓':''}</div><div class="goaltext">${esc(x.text)}</div><button class="del" onclick="delGoal(${i})">×</button></div>${x.target?`<small>هدف/عدد: ${esc(x.target)}</small>`:''}</div>`);
+}
+function renderHistory(){
+document.getElementById('histTitle').textContent=monthName(histCursor);
+let prefix=monthKey(histCursor);
+let keys=Object.keys(db.days).filter(k=>k.startsWith(prefix)).sort().reverse();
+let el=document.getElementById('historyList');
+el.innerHTML=keys.length?'':'<div class="empty">هنوز سابقه‌ای برای این ماه ثبت نشده.</div>';
+
+let sleepValues=keys.map(k=>sleepMinutes(db.days[k].sleep||'',db.days[k].wake||'')).filter(v=>v!=null);
+let avgSleep=sleepValues.length?Math.round(sleepValues.reduce((a,b)=>a+b,0)/sleepValues.length):null;
+if(keys.length){
+  el.innerHTML+=`<div class="sleepAverage">🌙 میانگین خواب این ماه: ${sleepText(avgSleep)} <small>(${sleepValues.length} روز با خواب ثبت‌شده)</small></div>`;
+}
+
+keys.forEach(k=>{
+  let d=db.days[k],total=d.tasks.length,done=d.tasks.filter(x=>x.done).length;
+  let mins=sleepMinutes(d.sleep||'',d.wake||'');
+  el.innerHTML+=`<div class="historyDay">
+    <div class="historyHead"><b>${faDate(new Date(k+'T00:00:00'))}</b><span>${done}/${total} کار انجام شد</span></div>
+    <div class="sleepHistory">
+      <span>🌙 خواب: ${d.sleep||'—'}</span>
+      <span>☀️ بیداری: ${d.wake||'—'}</span>
+      <span>😴 مدت خواب: ${sleepText(mins)}</span>
+    </div>
+    ${d.motivation?`<div style="margin-top:7px;padding:8px;background:var(--blue2);border-radius:10px;font-size:12px">✨ ${esc(d.motivation)}</div>`:''}
+    <div class="historyItems">${d.tasks.map(x=>`<div class="${x.done?'done':''}">${x.done?'✓':'○'} ${esc(x.text)}${x.time?' · '+x.time:''}</div>`).join('')||'<div>کاری ثبت نشده</div>'}</div>
+  </div>`;
+});
+
+let books=db.books.filter(x=>x.date.startsWith(prefix)),bl=document.getElementById('monthBooks');
+bl.innerHTML=books.length?books.map(x=>`<div class="book">📖 ${esc(x.name)} <span style="color:#9aa7b3">— ${x.date}</span></div>`).join(''):'<div class="empty">این ماه کتابی ثبت نشده.</div>';
+}
+function renderAll(){renderToday();renderCalendar();renderGoals();renderHistory()}
+document.getElementById('photoInput').addEventListener('change',handlePhoto);
+renderAll();
+renderProfile();
+</script>
+
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
